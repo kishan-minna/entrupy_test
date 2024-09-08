@@ -1,0 +1,72 @@
+version: 2
+
+# Define your raw data sources
+sources:
+  - name: raw_data  # Name of the source
+    schema: public  # Replace with the actual schema where raw tables reside
+    tables:
+      - name: raw_companies
+        description: "Raw data of companies using the authentication system"
+      - name: raw_items
+        description: "Raw data of items being authenticated"
+      - name: raw_auth_events
+        description: "Raw data of authentication events"
+
+# Define your staging models and tests
+models:
+  - name: stg_companies
+    description: "Staging table for cleaned companies data"
+    columns:
+      - name: company_id
+        description: "Unique identifier for each company"
+        tests:
+          - unique
+          - not_null
+      - name: company_name
+        description: "The name of the company"
+        tests:
+          - not_null
+      - name: region
+        description: "Geographical region of the company"
+      - name: num_staff
+        description: "Number of staff in the company"
+
+  - name: stg_items
+    description: "Staging table for cleaned items data"
+    columns:
+      - name: item_name 
+        description: "The name of the item"
+        tests:
+          - not_null
+      - name: brand_name
+        description: "The brand of the item"
+      - name: msrp_in_usd
+        description: "Manufacturer's suggested retail price in USD"
+
+  - name: stg_auth_events
+    description: "Staging table for cleaned authentication events data"
+    columns:
+      - name: company_id
+        description: "Foreign key to the companies table"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_companies')
+              field: company_id
+      - name: item_name
+        description: "The item being authenticated"
+        tests:
+          - not_null
+          - relationships:
+              to: ref('stg_items')
+              field: item_name
+      - name: result
+        description: "Result of the authentication"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['authentic', 'fake', 'bad_input']
+      - name: auth_date
+        description: "Date of the authentication event"
+        tests:
+          - not_null
