@@ -70,3 +70,41 @@ models:
         description: "Date of the authentication event"
         tests:
           - not_null
+
+# Define your marts and final models
+  - name: master_table
+    description: "Master table combining company, item, and authentication event data for reporting and analysis."
+    columns:
+      - name: company_id
+        description: "Unique identifier for the company."
+        tests:
+          - not_null
+          - unique
+      - name: company_name
+        description: "The name of the company."
+        tests:
+          - not_null
+      - name: num_staff
+        description: "Number of employees in the company."
+      - name: region
+        description: "The geographic region where the company is located."
+      - name: brand_name
+        description: "Brand associated with the item."
+        tests:
+          - not_null
+      - name: item_name
+        description: "Name of the item being authenticated."
+        tests:
+          - not_null
+      - name: msrp_in_usd
+        description: "Manufacturer's Suggested Retail Price of the item in USD."
+      - name: auth_date
+        description: "Date when the authentication event occurred."
+        tests:
+          - not_null
+      - name: result
+        description: "Result of the authentication event."
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['authentic', 'fake', 'bad_input']
