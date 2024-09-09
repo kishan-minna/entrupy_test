@@ -75,7 +75,7 @@ models:
           - not_null
 
 # Define your marts and final models
-  - name: master_table
+  - name: master_auth_events
     description: "Master table combining company, item, and authentication event data for reporting and analysis."
     tags: ['marts']  # Add tag to identify it as a marts model
     columns:

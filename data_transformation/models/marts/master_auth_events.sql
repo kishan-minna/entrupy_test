@@ -1,4 +1,4 @@
--- models/marts/master_table.sql
+-- models/marts/master_auth_events.sql
 
 /*
     This model combines data from the staging tables (companies, authentication events, and items) into a master table.

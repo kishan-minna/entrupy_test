@@ -33,7 +33,7 @@ WITH company_aggregates AS (
         
         -- Distinct count of regions where the company operates
         COUNT(DISTINCT mt.region) AS distinct_region_count
-    FROM {{ ref('master_table') }} mt  -- Use master_table as the source
+    FROM {{ ref('master_auth_events') }} mt  -- Use master_table as the source
     GROUP BY mt.company_id, mt.company_name, mt.region, mt.num_staff
 )
 
