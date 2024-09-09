@@ -11,7 +11,7 @@ WITH cleaned_items AS (
     SELECT
         LOWER(TRIM(brand)) AS brand_name,
         LOWER(TRIM(unaccent(item_name))) AS item_name,  -- Removes accents from item_name
-        msrp AS msrp_in_usd                             -- Renames msrp to msrp_inusd
+        CAST(msrp AS NUMERIC) AS msrp_in_usd                           -- Renames msrp to msrp_inusd
     FROM {{ source('raw_data', 'raw_items') }}          -- Reference the raw items table
 )
 

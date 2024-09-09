@@ -27,13 +27,17 @@ clean-targets:         # directories to be removed by `dbt clean`
 models:
   data_transformation:
     # Config indicated by + and applies to all files under models/example/
-    final:
+    marts:
       +materialized: table
+      +tags: ['marts']
     staging:
       +materialized: view
+      +tags: ['staging']
+      
+    
 
-# Configuring snapshots
-snapshots:
-  data_transformation:
-    +target_schema: 'snapshots'  # Define the schema for storing snapshots
-    +target_database: 'postgres'  
+# # Configuring snapshots
+# snapshots:
+#   data_transformation:
+#     +target_schema: 'snapshots'  # Define the schema for storing snapshots
+#     +target_database: 'postgres'  

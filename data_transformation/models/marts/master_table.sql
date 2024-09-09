@@ -19,4 +19,4 @@ SELECT
     ae.result
 FROM {{ ref('stg_companies') }} cd
 INNER JOIN {{ ref('stg_auth_events') }} ae ON cd.company_id = ae.company_id  
-INNER JOIN {{ ref('stg_items') }} i ON ae.item_name = i.item_name;
+INNER JOIN {{ ref('stg_items') }} i ON ae.item_name = i.item_name

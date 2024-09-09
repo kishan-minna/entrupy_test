@@ -16,6 +16,7 @@ sources:
 models:
   - name: stg_companies
     description: "Staging table for cleaned companies data"
+    tags: ['staging']  # Add tag to identify it as a staging model
     columns:
       - name: company_id
         description: "Unique identifier for each company"
@@ -33,6 +34,7 @@ models:
 
   - name: stg_items
     description: "Staging table for cleaned items data"
+    tags: ['staging']  # Add tag to identify it as a staging model
     columns:
       - name: item_name 
         description: "The name of the item"
@@ -45,6 +47,7 @@ models:
 
   - name: stg_auth_events
     description: "Staging table for cleaned authentication events data"
+    tags: ['staging']  # Add tag to identify it as a staging model
     columns:
       - name: company_id
         description: "Foreign key to the companies table"
@@ -74,12 +77,12 @@ models:
 # Define your marts and final models
   - name: master_table
     description: "Master table combining company, item, and authentication event data for reporting and analysis."
+    tags: ['marts']  # Add tag to identify it as a marts model
     columns:
       - name: company_id
         description: "Unique identifier for the company."
         tests:
           - not_null
-          - unique
       - name: company_name
         description: "The name of the company."
         tests:
